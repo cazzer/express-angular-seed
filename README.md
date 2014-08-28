@@ -1,4 +1,4 @@
-express-angular
+Express Angular Seed
 ===============
 
-An seed project powered by Express and Angular
+*A seed project powered by Express and Angular.*
