@@ -1,0 +1,28 @@
+{
+  "name": "express-angular-seed",
+  "version": "0.0.0",
+  "description": "A seed project powered by Express and Angular",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/calebthebrewer/express-angular-seed.git"
+  },
+  "keywords": [
+    "express",
+    "angular",
+    "seed",
+    "node"
+  ],
+  "author": "Caleb Brewer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/calebthebrewer/express-angular-seed/issues"
+  },
+  "homepage": "https://github.com/calebthebrewer/express-angular-seed",
+  "dependencies": {
+    "express": "~4.8.6"
+  }
+}
