@@ -66,9 +66,9 @@ gulp.task('watch', ['dev'], function() {
 
 gulp.task('dev', ['sass', 'js', 'html', 'vendor']);
 
-gulp.task('prod', ['clean'], function() {
+gulp.task('prod', function() {
 	isProd = true;
-	runSequence(['dev']);
+	return runSequence(['dev']);
 });
 
 gulp.task('sass', function() {
@@ -93,7 +93,10 @@ gulp.task('js', function() {
 
 gulp.task('html', function() {
 	gulp.src(htmlFiles)
-		.pipe(gulpIf(isProd, minifyHtml()))
+		.pipe(gulpIf(isProd, minifyHtml({
+			empty: true,
+			quote: true
+		})))
 		.pipe(gulp.dest(prod));
 });
 
