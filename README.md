@@ -11,6 +11,11 @@ Express Angular Seed
 - `npm install -g bower`
 - `npm install`
 
+### Building
+- `gulp` - runs a watch which recompiles automatically
+- `gulp dev` - compiles once
+- `gulp prod` - compiles and minifies
+
 ### Usage
 - Boot up a mongod instance
 - `node index.js`
