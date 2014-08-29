@@ -40,5 +40,7 @@
     "run-sequence": "~0.3.6",
     "gulp-minify-html": "~0.1.4"
   },
-  "postinstall": "bower install"
+  "scripts": {
+	  "postinstall": "bower install"
+  }
 }
