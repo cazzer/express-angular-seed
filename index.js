@@ -2,6 +2,7 @@
 Modules
  */
 var express = require('express'),
+	bodyParser = require('body-parser'),
 	api = require('./server/api'),
 	apiHelp = require('./server/api-help');
 
@@ -9,7 +10,6 @@ var express = require('express'),
 The App
  */
 var app = module.exports = express();
-
 /*
 Set App variables
  */
@@ -22,6 +22,7 @@ app.set('version', 1);
 Set App configuration
  */
 app.use(express.static(__dirname + '/' + app.get(('client'))));
+app.use(bodyParser.json());
 
 /*
 Load the client side

@@ -6,7 +6,7 @@ var api = {};
 /*
 Add routes here
  */
-api.example = require('./routes/example');
+api.sample = require('./routes/sample');
 
 /*
 Start it up
