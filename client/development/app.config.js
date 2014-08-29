@@ -20,7 +20,8 @@ angular.module('app')
 					url: '/child',
 					views: {
 						'': {
-							templateUrl: 'views/sample.child.tpl.html'
+							templateUrl: 'views/sample.child.tpl.html',
+							controller: 'child'
 						}
 					}
 				})
