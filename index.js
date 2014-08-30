@@ -2,9 +2,7 @@
 Modules
  */
 var express = require('express'),
-	bodyParser = require('body-parser'),
-	api = require('./server/api'),
-	apiHelp = require('./server/api-help');
+	bodyParser = require('body-parser');
 
 /*
 The App
@@ -32,22 +30,9 @@ app.get('/', function(req, res) {
 });
 
 /*
-Load the Api
+Load routes
  */
-var base = '/api/'  + app.get('version') + '/';
-for (var route in api) {
-	for (var verb in api[route]) {
-		var apiRoute = route + (api[route][verb].route ? api[route][verb].route : '');
-		app[verb](base + apiRoute, api[route][verb].request);
-		app.options(base + apiRoute, apiHelp.describe(api[route][verb]));
-	}
-}
-
-/*
-Load the Api helper
- */
-apiHelp.document(api);
-app.options(base, apiHelp.help);
+require('./server/routes')(app)	;
 
 /*
 Start it up
@@ -55,3 +40,8 @@ Start it up
 app.listen(app.get('port'), function() {
 	console.log('Doin\' something fun over at :' + app.get('port'));
 });
+
+/*
+Makes this module public
+ */
+module.exports = app;
