@@ -30,9 +30,9 @@ app.get('/', function(req, res) {
 });
 
 /*
-Load routes
+Load routes...anyone have a better way of doing this in Express?
  */
-require('./server/routes')(app)	;
+require('./server/routes')(app);
 
 /*
 Start it up

@@ -6,7 +6,7 @@ module.exports  = function(app) {
 	var base = '/api/1/';
 
 	app.get(base + 'samples/:id?', function(req, res) {
-		if (!!req.params.id) {
+		if (paramExists(req, 'id')) {
 			samples.findOne({
 				_id: db.ObjectId(req.params.id)
 			}, function(err, samples) {
@@ -17,12 +17,16 @@ module.exports  = function(app) {
 		}
 	});
 
-	app.put(base + 'samples/:id', function(req, res) {
-		samples.update({
-			_id: db.ObjectId(req.params.id)
-		}, function(err, n) {
-			res.send(err || n);
-		});
+	app.put(base + 'samples/:id?', function(req, res) {
+		if (paramExists(req, 'id')) {
+			samples.update({
+				_id: db.ObjectId(req.params.id)
+			}, function(err, n) {
+				res.send(err || n);
+			});
+		} else {
+			res.status(400).send('Sample ID is required.');
+		}
 	});
 
 	app.post(base + 'samples', function(req, res) {
@@ -31,13 +35,22 @@ module.exports  = function(app) {
 		});
 	});
 
-	app.delete(base + 'samples/:id', function(req, res) {
-		samples.remove({
-			_id: db.ObjectId(req.params.id)
-		}, function(err, n) {
-			res.send(err || n);
-		});
+	app.delete(base + 'samples/:id?', function(req, res) {
+		if (paramExists(req, 'id')) {
+			samples.remove({
+				_id: db.ObjectId(req.params.id)
+			}, function(err, n) {
+				res.send(err || n);
+			});
+		} else {
+			res.status(400).send('Sample ID is required.');
+		}
 	});
+
+	app.get('*', notFound);
+	app.put('*', notFound);
+	app.post('*', notFound);
+	app.delete('*', notFound);
 
 };
 
@@ -45,4 +58,12 @@ function getAll(res) {
 	samples.find(function(err, samples) {
 		res.send(samples);
 	});
+}
+
+function paramExists(req, param) {
+	return !!req.params && req.params[param];
+}
+
+function notFound(req, res) {
+	res.status(404).send('That thing you were looking for is not a thing.');
 }
