@@ -11,9 +11,14 @@ angular.module('app')
 					sample: $scope.newSample
 				}).success(function(sample) {
 					$scope.samples.push(sample);
-					//loadSamples(); //extra API call, but technically more verbose
+					loadSamples(); //extra API call, but technically more verbose
 					$scope.newSample = '';
 				});
+			};
+
+			$scope.deleteSample = function(id) {
+				samples.delete(id);
+				loadSamples();
 			};
 
 			function loadSamples() {

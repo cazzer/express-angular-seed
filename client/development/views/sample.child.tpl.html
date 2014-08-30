@@ -6,5 +6,5 @@
 			</div>
 		</form>
 		<ul>
-			<li ng-repeat="sample in samples track by sample._id">{{sample.sample}}</li>
+			<li ng-repeat="sample in samples track by sample._id">{{sample.sample}}<button ng-click="deleteSample(sample._id)">Kill Em</button></li>
 		</ul>
