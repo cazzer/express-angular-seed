@@ -24,5 +24,5 @@ angular.module('app')
 							controller: 'child'
 						}
 					}
-				})
+				});
 		}]);
