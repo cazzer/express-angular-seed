@@ -1,7 +1,7 @@
 angular.module('app')
 	.factory('samples', ['$http', function($http) {
 		var samples = {},
-			api = 'api/1/sample/';
+			api = 'api/1/samples/';
 
 		samples.get = function(id) {
 			if (!id) id = '';
@@ -10,7 +10,11 @@ angular.module('app')
 
 		samples.post = function(sample) {
 			return $http.post(api, sample);
-		}
+		};
+
+		samples.delete = function(id) {
+			return $http.delete(api + id);
+		};
 
 		return samples;
 	}]);
