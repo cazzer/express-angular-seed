@@ -37,8 +37,9 @@ Load the Api
 var base = '/api/'  + app.get('version') + '/';
 for (var route in api) {
 	for (var verb in api[route]) {
-		app[verb](base + route, api[route][verb].request);
-		app.get(base + route + '/describe', apiHelp.describe(api[route][verb]));
+		var apiRoute = route + (api[route][verb].route ? api[route][verb].route : '');
+		app[verb](base + apiRoute, api[route][verb].request);
+		app.options(base + apiRoute, apiHelp.describe(api[route][verb]));
 	}
 }
 
@@ -46,7 +47,7 @@ for (var route in api) {
 Load the Api helper
  */
 apiHelp.document(api);
-app.get(base + 'help', apiHelp.help);
+app.options(base, apiHelp.help);
 
 /*
 Start it up
