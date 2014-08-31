@@ -67,6 +67,7 @@ gulp.task('watch', ['dev'], function() {
 	gulp.watch(sassFiles, ['sass']);
 	gulp.watch(jsFiles, ['js']);
 	gulp.watch(htmlFiles, ['html']);
+	gulp.watch(templateFiles, ['templates']);
 });
 
 gulp.task('dev', ['sass', 'js', 'html', 'vendor', 'templates']);
