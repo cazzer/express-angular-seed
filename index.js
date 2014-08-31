@@ -13,7 +13,7 @@ Set App variables
  */
 app.set('port', process.env.PORT || 3000);
 app.set('environment', process.env.NODE_ENV || 'development');
-app.set('client', 'client/production')
+app.set('client', 'client/production');
 app.set('version', 1);
 
 /*

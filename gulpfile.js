@@ -13,7 +13,8 @@ var gulp = require('gulp'),
 	clean = require('gulp-clean'),
 	concat = require('gulp-concat'),
 	eventStream = require('event-stream'),
-	runSequence = require('run-sequence');
+	runSequence = require('run-sequence'),
+	html2js = require('gulp-ng-html2js');
 
 /*
  Helpful Variables
@@ -26,7 +27,11 @@ var dev = 'client/development',
 /*
  Globs
  */
-var htmlFiles = dev + '/**/*.html',
+var htmlFiles = [
+			dev + '/**/*.html',
+			'!' + dev + '/**/*.tpl.html'
+	],
+	templateFiles = dev + '/**/*.tpl.html',
 	sassFiles = dev + '/**/*.scss',
 	jsFiles = [
 			dev + '/**/*.module.js',
@@ -64,7 +69,7 @@ gulp.task('watch', ['dev'], function() {
 	gulp.watch(htmlFiles, ['html']);
 });
 
-gulp.task('dev', ['sass', 'js', 'html', 'vendor']);
+gulp.task('dev', ['sass', 'js', 'html', 'vendor', 'templates']);
 
 gulp.task('prod', function() {
 	isProd = true;
@@ -97,6 +102,21 @@ gulp.task('html', function() {
 			empty: true,
 			quote: true
 		})))
+		.pipe(gulp.dest(prod));
+});
+
+gulp.task('templates', function() {
+	gulp.src(templateFiles)
+		.pipe(minifyHtml({
+			empty: true,
+			spare: true,
+			quotes: true
+		}))
+		.pipe(html2js({
+			moduleName: "templates"
+		}))
+		.pipe(concat("templates.js"))
+		.pipe(uglify())
 		.pipe(gulp.dest(prod));
 });
 
