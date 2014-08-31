@@ -2,10 +2,14 @@ var utils = require('./routes/_utils');
 
 module.exports  = function(app) {
 
-	var base = '/api/1/';
-
+	/*
+	The samples
+	 */
 	require('./routes/samples')(app);
 
+	/*
+	Catch the rest
+	 */
 	app.get('*', utils.notFound);
 	app.put('*', utils.notFound);
 	app.post('*', utils.notFound);

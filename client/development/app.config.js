@@ -12,15 +12,15 @@ angular.module('app')
 					url: '/',
 					templateUrl: 'views/home.tpl.html'
 				})
-				.state('sample', {
-					url: '/sample',
-					templateUrl: 'views/sample.tpl.html'
+				.state('samples', {
+					url: '/samples',
+					templateUrl: 'views/samples.tpl.html'
 				})
-				.state('sample.child', {
+				.state('samples.child', {
 					url: '/child',
 					views: {
 						'': {
-							templateUrl: 'views/sample.child.tpl.html',
+							templateUrl: 'views/samples.child.tpl.html',
 							controller: 'child'
 						}
 					}

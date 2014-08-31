@@ -1,4 +1,4 @@
-var db = require('./db'),
+var db = require('../db'),
 	utils = require('./_utils'),
 	samples = db.collection('samples');
 
