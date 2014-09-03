@@ -1,59 +1,47 @@
 var db = require('../db'),
+	utils = require('./_utils'),
 	samples = db.collection('samples');
 
-exports.get = {
-	route: '/:id?',
-	request: function(req, res) {
-		if (!!req.params.id) {
+module.exports = function(app) {
+	app.get(utils.base + 'samples/:id?', function(req, res) {
+		if (utils.paramExists(req, 'id')) {
 			samples.findOne({
 				_id: db.ObjectId(req.params.id)
 			}, function(err, samples) {
 				res.send(samples);
 			});
 		} else {
-			getAll(res);
+			utils.getAll(samples, res);
 		}
+	});
 
-	},
-	in: {
-		key: 'value'
-	},
-	out: [
-		'string',
-		'...'
-	]
-};
+	app.put(utils.base + 'samples/:id?', function(req, res) {
+		if (utils.paramExists(req, 'id')) {
+			samples.update({
+				_id: db.ObjectId(req.params.id)
+			}, function(err, n) {
+				res.send(err || n);
+			});
+		} else {
+			res.status(400).send('Sample ID is required.');
+		}
+	});
 
-exports.post = {
-	request: function(req, res) {
-		if (!req.body.sample) res.send("Well that's a bad request.");
+	app.post(utils.base + 'samples', function(req, res) {
 		samples.save(req.body, function(err, sample) {
 			res.send(sample);
 		});
-	},
-	in: {
-		sample: 'value [string]'
-	},
-	out: 'sample ID'
-};
-
-exports.delete = {
-	route: '/:id',
-	request: function(req, res) {
-		samples.remove({
-			_id: db.ObjectId(req.params.id)
-		}, function(err, n) {
-			res.send(err || n);
-		});
-	},
-	in: {
-		sample: 'value [string]'
-	},
-	out: 'sample ID'
-};
-
-function getAll(res) {
-	samples.find(function(err, samples) {
-		res.send(samples);
 	});
-}
+
+	app.delete(utils.base + 'samples/:id?', function(req, res) {
+		if (utils.paramExists(req, 'id')) {
+			samples.remove({
+				_id: db.ObjectId(req.params.id)
+			}, function(err, n) {
+				res.send(err || n);
+			});
+		} else {
+			res.status(400).send('Sample ID is required.');
+		}
+	});
+};

@@ -1,0 +1,12 @@
+<div class="container-fluid">
+	<h2>Child!</h2>
+	<form ng-submit="createSample()" role="form">
+		<div class="form-group">
+			<label for="newSample">Enter a new sample value and hit enter:</label>
+			<input id="newSample" type="text" ng-model="newSample" class="form-control">
+		</div>
+	</form>
+	<ul>
+		<li ng-repeat="sample in samples track by sample._id">{{sample.sample}}<button ng-click="deleteSample(sample._id)">Kill Em</button></li>
+	</ul>
+</div>

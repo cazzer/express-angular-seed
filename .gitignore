@@ -1,0 +1,19 @@
+# common ones
+bower_components/*
+node_modules/*
+.idea/*
+.project/*
+*.zip
+*.log
+*.7z
+*.gzip
+*.exe
+*.orig
+*.tar
+*.rar
+*.jar
+.Trashes
+.DS_STORE
+
+# our special ones
+client/production/*
